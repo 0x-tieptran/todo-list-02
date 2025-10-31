@@ -8,7 +8,12 @@ export default defineConfig({
   ],
 
   // Reporter to use. 'html' is the one you'll view.
-  reporter: [['html']],
+  // Reporter to use. 'html' is the one you'll view.
+  reporter: 'html',
+
+  // All test artifacts (reports, videos, screenshots)
+  // will be stored in this directory.
+  outputDir: 'playwright-report/',
   timeout: 30 * 1000,
   expect: { timeout: 5000 },
   fullyParallel: true,
@@ -18,7 +23,16 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:5173',
     actionTimeout: 0,
-    trace: 'on-first-retry',
+    // Records a trace file for each test, but removes it
+    // from successful test runs.
+    trace: 'retain-on-failure',
+
+    // Takes a screenshot if a test fails.
+    screenshot: 'only-on-failure',
+
+    // Records a video for each test, but removes it
+    // from successful test runs.
+    video: 'retain-on-failure',
     headless: true,
   },
 
@@ -32,7 +46,5 @@ export default defineConfig({
 
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ],
 });

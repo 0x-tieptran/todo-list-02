@@ -6,13 +6,9 @@ export default defineConfig({
     'tests/**/*.{spec,test}.{ts,tsx,js,jsx,mjs,cjs}',
     'ai-generated-tests/**/*.{spec,test}.{ts,tsx,js,jsx,mjs,cjs}'
   ],
-  
-  // Reporter to use. 'html' is the one you'll view.
-  reporter: 'html',
 
-  // All test artifacts (reports, videos, screenshots)
-  // will be stored in this directory.
-  outputDir: 'playwright-report/',
+  // Reporter to use. 'html' is the one you'll view.
+  reporter: [['html']],
   timeout: 30 * 1000,
   expect: { timeout: 5000 },
   fullyParallel: true,

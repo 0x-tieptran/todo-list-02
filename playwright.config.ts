@@ -6,14 +6,19 @@ export default defineConfig({
     'tests/**/*.{spec,test}.{ts,tsx,js,jsx,mjs,cjs}',
     'ai-generated-tests/**/*.{spec,test}.{ts,tsx,js,jsx,mjs,cjs}'
   ],
+  
+  // Reporter to use. 'html' is the one you'll view.
+  reporter: 'html',
 
+  // All test artifacts (reports, videos, screenshots)
+  // will be stored in this directory.
+  outputDir: 'playwright-report/',
   timeout: 30 * 1000,
   expect: { timeout: 5000 },
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: [['list'], ['html', { outputFolder: 'playwright-report' }]],
   use: {
     baseURL: 'http://127.0.0.1:5173',
     actionTimeout: 0,
@@ -31,7 +36,7 @@ export default defineConfig({
 
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox',  use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit',   use: { ...devices['Desktop Safari'] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ],
 });
